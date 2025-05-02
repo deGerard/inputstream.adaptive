@@ -268,7 +268,9 @@ void CdmAdapter::Initialize()
 
   init_cdm_func();
 
-  cdm11_ = static_cast<cdm::ContentDecryptionModule_11*>(create_cdm_func(11, key_system_.data(), key_system_.size(), GetCdmHost, this));
+  if (version != "4.10.2891.0") {
+      cdm11_ = static_cast<cdm::ContentDecryptionModule_11 *>(create_cdm_func(11, key_system_.data(), key_system_.size(), GetCdmHost, this));
+  }
 
   if (!cdm11_)
   {
